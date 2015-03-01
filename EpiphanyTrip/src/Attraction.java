@@ -4,7 +4,7 @@ public class Attraction {
 	private String cityName;
 	private double rating;
 	private double distanceFromStart;
-	private String pic_url;
+	private String picURL;
 	private String weather; //Sunny, Mostly Cloudy, Rainy...
 	
 	
@@ -43,5 +43,9 @@ public class Attraction {
 	
 	public String getWeather(){
 		return weather;
+	}
+	
+	public String getPicURL(){
+		return picURL;
 	}
 }
