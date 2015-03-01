@@ -1,14 +1,21 @@
 //package com.example.hackdfw.epiphanytripapp;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.xml.xpath.XPathExpressionException;
 
 
 public class AttractionDatabase {
 	private ArrayList<Attraction> attractions;
 
-	public AttractionDatabase(String start_location, Date date, int distance){
-		YelpQuery yp = new YelpQuery();
-		attractions = yp.getAttractions(start_location , distance);
+	public AttractionDatabase(String start_location, Date date, int distance) throws XPathExpressionException, IOException{
+		YelpQuery yq = new YelpQuery();
+		attractions = yq.getAttractions(start_location , distance);
+		WeatherQuery wq = new WeatherQuery();
+		for(int i = 0; i<attractions.size(); i++){
+			attractions.get(i).setWeather(wq.getWeather(attractions.get(i).getCity(), date));
+		}
 	}
 
     public ArrayList<Attraction> getAllAttractions(){
