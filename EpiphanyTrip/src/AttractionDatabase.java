@@ -4,9 +4,10 @@ import java.util.Date;
 
 public class AttractionDatabase {
 	private ArrayList<Attraction> attractions;
-	
+
 	public AttractionDatabase(String start_location, Date date, int distance){
-		
+		YelpQuery yp = new YelpQuery();
+		attractions = yp.getAttractions(start_location , distance);
 	}
 	
 	public ArrayList<Attraction> filterByDistance(int d){
