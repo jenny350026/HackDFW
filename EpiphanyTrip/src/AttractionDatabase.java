@@ -48,7 +48,7 @@ public class AttractionDatabase {
 			return null;
 		else{	
 			for(int i = 0; i < attr.size(); i++){
-			    if(attr.get(i).getWeather().equals(w)){
+			    if(attr.get(i).getWeather().getSummary().equals(w)){
 			        temp_attr.add(attr.get(i));
 			    }
 			}
