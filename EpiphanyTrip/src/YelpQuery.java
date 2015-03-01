@@ -23,6 +23,7 @@ public class YelpQuery {
 	  public YelpQuery(){
 		  this.yelpAPI = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
 	  }
+<<<<<<< HEAD
 	  
 	public ArrayList<Attraction> getAttractions(String start_location, int distance){
 		char first_letter = Character.toLowerCase(start_location.charAt(0));
@@ -48,6 +49,40 @@ public class YelpQuery {
 			start_location = Double.toString(latitude) + ", " + Double.toString(longitude);
 		}
 		
+=======
+
+    public class FetchAPI extends Thread{
+        private String start_location;
+        private int distance;
+        private ArrayList<Attraction> attractions;
+
+        public FetchAPI(String s, int d){
+            start_location = s;
+            distance = d;
+        }
+
+        public void run() {
+            attractions = getAPIResponse(start_location, distance);
+        }
+
+        public ArrayList<Attraction> getResults(){
+            return attractions;
+        }
+    }
+
+    public ArrayList<Attraction> getAttractions(String start_location, int distance){
+        FetchAPI fapi = new FetchAPI(start_location, distance);
+        fapi.start();
+        try {
+            fapi.join();
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        return fapi.getResults();
+    }
+
+	public ArrayList<Attraction> getAPIResponse(String start_location, int distance){
+>>>>>>> master
 		ArrayList<Attraction>list = new ArrayList<Attraction>();
 		output_query = this.yelpAPI.search(start_location, distance, false);
 		System.out.println(output_query);
