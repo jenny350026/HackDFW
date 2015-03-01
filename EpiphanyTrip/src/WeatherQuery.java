@@ -55,7 +55,7 @@ public class WeatherQuery {
 		
 		//System.out.println(nodes.getLength());
 		for (int i = 0, n = nodes.getLength(); i < n; i++) {
-			
+			System.out.println(nodes.item(i).getNodeName() + ": " + nodes.item(i).getTextContent());
 			String nodeString = nodes.item(i).getTextContent();
 	        System.out.print(nodeString);
 	        System.out.print("\n");
