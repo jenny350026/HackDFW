@@ -33,10 +33,39 @@ public class WeatherQuery {
 	// adding private to query API
 	public Weather getWeather(String cn, Date d) throws XPathExpressionException, IOException{
 		String[] parts = cn.split(", ");
-		return getAPIResponse("forecast10day/q/" + parts[1] + "/" + parts[0] + ".xml", d);
+        FetchAPI fapi = new FetchAPI("forecast10day/q/" + parts[1] + "/" + parts[0] + ".xml", d);
+        fapi.start();
+        try {
+            fapi.join();
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+		return fapi.getResult();
 	}
-	
-	
+
+    public class FetchAPI extends Thread {
+        private String request;
+        private Date date;
+        private Weather weather;
+        public FetchAPI(String r, Date d){
+            request = r;
+            date = d;
+        }
+
+        public void run() {
+            try {
+                weather = getAPIResponse(request, date);
+            }catch(XPathExpressionException e){
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        public Weather getResult(){
+            return weather;
+        }
+    }
 	private Weather getAPIResponse(String request, Date d) throws IOException, XPathExpressionException{
 		
 		URL url = new URL(httpRequest + request);
@@ -50,6 +79,7 @@ public class WeatherQuery {
 		NodeList urlNodes = (NodeList) xpath.compile("/response/forecast/txt_forecast/forecastdays/forecastday/icon_url").evaluate(inputXml, XPathConstants.NODESET);
 
 		int diff = d.compareTo(new Date());
+        diff = (diff < 1)? 1:diff;
 		
 //		for (int i = 0, n = iconNodes.getLength(); i < n; i++) {
 //			Node node = iconNodes.item(i).getFirstChild();
@@ -58,6 +88,6 @@ public class WeatherQuery {
 //
 //	    }
 		
-		return new Weather(iconNodes.item(diff-1).getFirstChild().getNodeValue(), urlNodes.item(diff-1).getFirstChild().getNodeValue());
+		return new Weather(iconNodes.item(diff).getFirstChild().getNodeValue(), urlNodes.item(diff).getFirstChild().getNodeValue());
 	}
 }
