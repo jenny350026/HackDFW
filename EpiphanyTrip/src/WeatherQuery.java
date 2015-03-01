@@ -80,6 +80,10 @@ public class WeatherQuery {
 
 		int diff = d.compareTo(new Date());
         diff = (diff < 1)? 1:diff;
+        
+        if(diff > 10){
+        	return new Weather("","");
+        }
 		
 //		for (int i = 0, n = iconNodes.getLength(); i < n; i++) {
 //			Node node = iconNodes.item(i).getFirstChild();
