@@ -59,6 +59,7 @@ public class YelpQuery {
 		String output_query;
 		JSONParser parser;
 		JSONObject response = null;
+		distance  = (int)distance * 1609;
 		
 		//if true get longitude and latitude 
 		if (first_letter <= 'z' && first_letter >= 'a'){
@@ -92,7 +93,12 @@ public class YelpQuery {
 		
 		JSONArray businesses = (JSONArray) response.get("businesses");
 		for(int i = 0; i < 10; i ++){
-			JSONObject cur_business = (JSONObject) businesses.get(i);
+			JSONObject cur_business;
+			try{
+				cur_business = (JSONObject) businesses.get(i);
+			}catch(RuntimeException pe){
+				return list;
+			}
 			JSONObject loc = (JSONObject) cur_business.get("location");
 			double attr_distance = (double)cur_business.get("distance");
 			String attr_name = (String)cur_business.get("name");
