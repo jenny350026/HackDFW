@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-=======
+
 //package com.example.hackdfw.epiphanytripapp;
 import java.io.IOException;
->>>>>>> master
 import java.util.ArrayList;
 import java.util.Date;
 

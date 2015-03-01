@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
 //package com.example.hackdfw.epiphanytripapp;
->>>>>>> master
+
 public class Attraction {
 	private String name;
 	private String cityName;
@@ -14,13 +12,13 @@ public class Attraction {
 		
 	
 	public Attraction(){}
-	public Attraction(String n, String cn, double r, double dfs, String pu, Weather w){
+	public Attraction(String n, String cn, double r, double dfs, String pu){
 		name = n;
 		cityName = cn; //city, STATE
 		rating = r;
 		distanceFromStart = dfs;
 		picURL = pu;
-		weather = w;
+		weather = null;
 	}
 		
 	public String getName(){
