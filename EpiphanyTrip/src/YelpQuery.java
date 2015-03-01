@@ -25,11 +25,33 @@ public class YelpQuery {
 	  }
 	  
 	public ArrayList<Attraction> getAttractions(String start_location, int distance){
-		ArrayList<Attraction>list = new ArrayList<Attraction>();
-		String output_query = this.yelpAPI.search(start_location, distance);
-		System.out.println(output_query);
-		JSONParser parser = new JSONParser();
+		char first_letter = Character.toLowerCase(start_location.charAt(0));
+		String output_query;
+		JSONParser parser;
 		JSONObject response = null;
+		
+		//if true get longitude and latitude 
+		if (first_letter <= 'z' && first_letter >= 'a'){
+			output_query = this.yelpAPI.search(start_location, distance, true);
+			parser = new JSONParser();
+			try {
+				  response = (JSONObject) parser.parse(output_query);
+			} catch (ParseException pe) {
+			  System.out.println("Error: could not parse JSON response:");
+			  System.out.println(output_query);
+			  System.exit(1);
+			}
+			JSONObject region_info = (JSONObject)response.get("region");
+			JSONObject center      = (JSONObject)region_info.get("center");
+			double latitude  = (double)center.get("latitude");
+			double longitude = (double)center.get("longitude");
+			start_location = Double.toString(latitude) + ", " + Double.toString(longitude);
+		}
+		
+		ArrayList<Attraction>list = new ArrayList<Attraction>();
+		output_query = this.yelpAPI.search(start_location, distance, false);
+		System.out.println(output_query);
+		parser = new JSONParser();
 		try {
 		  response = (JSONObject) parser.parse(output_query);
 		} catch (ParseException pe) {
