@@ -1,5 +1,3 @@
-package com.example.hackdfw.epiphanytripapp;
-
 import java.util.Date;
 
 

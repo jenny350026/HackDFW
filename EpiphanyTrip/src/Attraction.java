@@ -1,5 +1,3 @@
-package com.example.hackdfw.epiphanytripapp;
-
 public class Attraction {
 	private String name;
 	private String cityName;

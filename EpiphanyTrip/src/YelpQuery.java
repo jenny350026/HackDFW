@@ -1,15 +1,55 @@
-package com.example.hackdfw.epiphanytripapp;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class YelpQuery {
-	//populate your own private
 	
-	public YelpQuery(){
-		
-	}
-	
+	 /*
+	   * Update OAuth credentials below from the Yelp Developers API site:
+	   * http://www.yelp.com/developers/getting_started/api_access
+	   */
+	  private static String CONSUMER_KEY = "VkqrUAkISUpTZxo_HZRVBg";
+	  private static String CONSUMER_SECRET = "7AI12aT7xjIE908LM54PcStva-g";
+	  private static String TOKEN = "dIk2j8s2IXYbPHrSGm-CAifNFzNX2G3w";
+	  private static String TOKEN_SECRET = "5FCLNt0g9aRpAnarkpRL4U1TWec";
+	  
+	  private YelpAPI yelpAPI;
+	  
+	  public YelpQuery(){
+		  this.yelpAPI = new YelpAPI(CONSUMER_KEY, CONSUMER_SECRET, TOKEN, TOKEN_SECRET);
+	  }
+	  
 	public ArrayList<Attraction> getAttractions(String start_location, int distance){
-		return new ArrayList<Attraction>();
+		ArrayList<Attraction>list = new ArrayList<Attraction>();
+		String output_query = this.yelpAPI.search(start_location, distance);
+		System.out.println(output_query);
+		JSONParser parser = new JSONParser();
+		JSONObject response = null;
+		try {
+		  response = (JSONObject) parser.parse(output_query);
+		} catch (ParseException pe) {
+		  System.out.println("Error: could not parse JSON response:");
+		  System.out.println(output_query);
+		  System.exit(1);
+		}
+		
+		JSONArray businesses = (JSONArray) response.get("businesses");
+		for(int i = 0; i < 10; i ++){
+			JSONObject cur_business = (JSONObject) businesses.get(i);
+			JSONObject loc = (JSONObject) cur_business.get("location");
+			double attr_distance = (double)cur_business.get("distance");
+			String attr_name = (String)cur_business.get("name");
+			String picURL = (String)cur_business.get("snippet_image_url");
+			double rating = (double)cur_business.get("rating");
+			String city_name = (String)loc.get("city");
+			Attraction a = new Attraction(attr_name, city_name, rating, attr_distance, picURL);
+			list.add(a);
+		}
+		
+		return list;
 	}
 }
