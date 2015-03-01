@@ -14,10 +14,20 @@ public class AttractionDatabase {
     public ArrayList<Attraction> getAllAttractions(){
         return attractions;
     }
-
+    
     public ArrayList<Attraction> filterByDistance(int d , ArrayList<Attraction> attr){
+        ArrayList<Attraction> temp_attr = new ArrayList<Attraction>();
+    	if(attr.size()==0)
+    		return null;
+    	else{
+    		for(int i = 0; i<attr.size(); i++){
+	        	if(attr.get(i).getDistanceFromStart()<=d){
+	        		temp_attr.add(attr.get(i));
+	        	}
+    		}
+    		return temp_attr;
+        }     
         
-        return new ArrayList<Attraction>();
     }
 
     public ArrayList<Attraction> filterByDistance(int d){
@@ -25,8 +35,18 @@ public class AttractionDatabase {
     }
 
 	public ArrayList<Attraction> filterByWeather(String w , ArrayList<Attraction> attr){
-
-		return new ArrayList<Attraction>();
+		
+		ArrayList<Attraction> temp_attr = new ArrayList<Attraction>();
+		if(attr.size() == 0)
+			return null;
+		else{	
+			for(int i = 0; i < attr.size(); i++){
+			    if(attr.get(i).getWeather().equals(w)){
+			        temp_attr.add(attr.get(i));
+			    }
+			}
+			return temp_attr;
+		}
 	}
 
     public ArrayList<Attraction> filterByWeather(String w){
@@ -34,17 +54,35 @@ public class AttractionDatabase {
     }
 	
 	public ArrayList<Attraction> filterByRating(double r , ArrayList<Attraction> attr) {
-
-		return new ArrayList<Attraction>();
+		ArrayList<Attraction> temp_attr = new ArrayList<Attraction>();
+    	if(attr.size()==0)
+    		return null;
+    	else{
+    		for(int i = 0; i<attr.size(); i++){
+	        	if(attr.get(i).getDistanceFromStart()>=r){
+	        		temp_attr.add(attr.get(i));
+	        	}
+    		}
+    		return temp_attr;
+        }  
 	}
 
     public ArrayList<Attraction> filterByRating(double r) {
         return this.filterByRating(r,attractions);
     }
 
-	public ArrayList<Attraction> filterByCityName(String n , ArrayList<Attraction> attr){
-		
-		return new ArrayList<Attraction>();
+	public ArrayList<Attraction> filterByCityName(String cn , ArrayList<Attraction> attr){
+		ArrayList<Attraction> temp_attr = new ArrayList<Attraction>();
+		if(attr.size() == 0)
+			return null;
+		else{	
+			for(int i = 0; i < attr.size(); i++){
+			    if(attr.get(i).getWeather().equals(cn)){
+			        temp_attr.add(attr.get(i));
+			    }
+			}
+			return temp_attr;
+		}
 	}
 
     public ArrayList<Attraction> filterByCityName(String n){
