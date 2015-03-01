@@ -1,9 +1,12 @@
+<<<<<<< HEAD
+=======
 //package com.example.hackdfw.epiphanytripapp;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+>>>>>>> master
 import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;

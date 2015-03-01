@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 //package com.example.hackdfw.epiphanytripapp;
+>>>>>>> master
 public class Attraction {
 	private String name;
 	private String cityName;
