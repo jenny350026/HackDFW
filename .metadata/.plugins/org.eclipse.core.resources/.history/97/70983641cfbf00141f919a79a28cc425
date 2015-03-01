@@ -1,0 +1,12 @@
+
+public class YelpQuery {
+	//populate your own private
+	
+	public YelpQuery(){
+		
+	}
+	
+	public ArrayList<Attraction>getAttractions(){
+		return new ArrayList<Attraction>();
+	}
+}

@@ -1,0 +1,11 @@
+
+public class WeatherQuery {
+
+	public WeatherQuery() {
+		
+	}
+	// adding private to query API
+	public String getWeather(String cn, Date d){
+		return "";
+	}
+}

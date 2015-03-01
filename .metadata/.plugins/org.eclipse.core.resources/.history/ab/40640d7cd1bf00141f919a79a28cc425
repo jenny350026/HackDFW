@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+import java.util.Date;
+
+
+public class AttractionDatabase {
+	private ArrayList<Attraction> attractions;
+	
+	public AttractionDatabase(String start_location, Date date, int distance){
+		
+	}
+	
+	public ArrayList<Attraction> filterByDistance(int d){}
+	
+	pubilc ArrayList<Attraction> filterByWeather(String w){}
+	
+	public ArrayList<Attraction> filterByRating(double r) {}
+
+}

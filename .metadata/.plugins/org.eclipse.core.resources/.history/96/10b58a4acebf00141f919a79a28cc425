@@ -1,0 +1,20 @@
+
+public class Attraction {
+	private:
+		String name;
+		String cityName;
+		double rating;
+		double distanceFromStart;
+		
+	public:
+		Attraction(){}
+		Attraction(String n, String cn, double r, double dfs){
+			name = n;
+			cityName = cn;
+			rating = r;
+			distanceFromStart = dfs;
+		}
+		
+		String 
+
+}
