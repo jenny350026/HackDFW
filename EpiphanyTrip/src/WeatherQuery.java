@@ -36,7 +36,7 @@ public class WeatherQuery {
 	
 	
 	// adding private to query API
-	public Weather getWeather(String cn, Date d) throws XPathExpressionException, IOException, ParserConfigurationException, SAXException{
+	public Weather getWeather(String cn, Date d) throws XPathExpressionException, IOException{
 		String[] parts = cn.split(", ");
 		getAPIResponse("forecast10day/q/" + parts[1] + "/" + parts[0] + ".xml");
 		return new Weather("","");
@@ -44,7 +44,7 @@ public class WeatherQuery {
 	
 	
 	
-	private void getAPIResponse(String request) throws IOException, XPathExpressionException, ParserConfigurationException, SAXException{
+	private void getAPIResponse(String request) throws IOException, XPathExpressionException{
 		
 		URL url = new URL(httpRequest + request);
 		connection = (HttpURLConnection) url.openConnection();
@@ -55,6 +55,7 @@ public class WeatherQuery {
 		
 		//System.out.println(nodes.getLength());
 		for (int i = 0, n = nodes.getLength(); i < n; i++) {
+			
 			String nodeString = nodes.item(i).getTextContent();
 	        System.out.print(nodeString);
 	        System.out.print("\n");
