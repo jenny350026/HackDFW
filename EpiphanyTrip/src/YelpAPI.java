@@ -59,11 +59,14 @@ public class YelpAPI {
    * @param location <tt>String</tt> of the location
    * @return <tt>String</tt> JSON Response
    */
-  public String searchForBusinessesByLocation(String term, String location) {
+  public String searchForBusinessesByLocation(String term, String location, boolean location_by_name) {
     OAuthRequest request = createOAuthRequest(SEARCH_PATH);
     request.addQuerystringParameter("term", term);
    // request.addQuerystringParameter("location", location);
-    request.addQuerystringParameter("ll", this.search_location);
+    if(location_by_name)
+    	request.addQuerystringParameter("location", location);
+    else
+    	request.addQuerystringParameter("ll", this.search_location);
     request.addQuerystringParameter("radius_filter", Integer.toString(this.search_radius));
     request.addQuerystringParameter("limit", String.valueOf(this.search_num));
     return sendRequestAndGetResponse(request);
@@ -114,9 +117,9 @@ public class YelpAPI {
    * @param yelpApi <tt>YelpAPI</tt> service instance
    * @param yelpApiCli <tt>YelpAPICLI</tt> command line arguments
    */
-  private String queryAPI() {
+  private String queryAPI(boolean location_by_name) {
     String searchResponseJSON =
-        this.searchForBusinessesByLocation(this.search_term, this.search_location);
+        this.searchForBusinessesByLocation(this.search_term, this.search_location, location_by_name);
     
     return searchResponseJSON;
     /*JSONObject firstBusiness = (JSONObject) businesses.get(0);
@@ -132,15 +135,15 @@ public class YelpAPI {
     
   }
 
-  public String search(String location, int distance){
-	  return this.search(location, distance, 10);
+  public String search(String location, int distance, boolean location_by_name){
+	  return this.search(location, distance, 10, location_by_name);
   }
   
-  public String search(String location, int distance, int number) {
+  public String search(String location, int distance, int number, boolean location_by_name) {
     this.search_location = location;
     this.search_radius = distance;
     this.search_num = number;
    
-    return queryAPI();
+    return queryAPI(location_by_name);
   }
 }
