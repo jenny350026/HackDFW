@@ -1,19 +1,19 @@
 
 public class Weather {
 
-	private String weather;
-	private String weatherURL;
+	private String summary;
+	private String picURL;
 	
 	public Weather(String w, String wURL){
-		weather = w;
-		weatherURL= wURL;
+		summary = w;
+		picURL= wURL;
 	}
 	
-	public String getWeather(){
-		return weather;
+	public String getSummary(){
+		return summary;
 	}
 	
-	public String getWeatherURL(){
-		return weatherURL;
+	public String getPicURL(){
+		return picURL;
 	}
 }
