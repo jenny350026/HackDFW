@@ -17,7 +17,7 @@ public class Attraction {
 		cityName = cn; //city, STATE
 		rating = r;
 		distanceFromStart = dfs;
-		pic_url = pu;
+		picURL = pu;
 		weather = "";
 	}
 		
