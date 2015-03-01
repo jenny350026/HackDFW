@@ -55,10 +55,12 @@ public class WeatherQuery {
 		inputXml = new InputSource(connection.getInputStream());
 
 		NodeList nodes = (NodeList) xpath.compile("/response/forecast/txt_forecast/forecastdays/forecastday").evaluate(inputXml, XPathConstants.NODESET);
-		
+
+		//NodeList nodes = (NodeList) xpath.compile("//icon").evaluate(inputXml, XPathConstants.NODESET);
+
 		//System.out.println(nodes.getLength());
 		for (int i = 0, n = nodes.getLength(); i < n; i++) {
-			System.out.println(nodes.item(i).getNodeName() + ": " + nodes.item(i).getTextContent());
+			System.out.println(nodes.toString());
 			String nodeString = nodes.item(i).getTextContent();
 	        System.out.print(nodeString);
 	        System.out.print("\n");
