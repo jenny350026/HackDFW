@@ -104,7 +104,8 @@ public class YelpQuery {
 			String attr_name = (String)cur_business.get("name");
 			String picURL = (String)cur_business.get("snippet_image_url");
 			double rating = (double)cur_business.get("rating");
-			String city_name = (String)loc.get("city");
+			JSONArray display = (JSONArray)loc.get("display_address");
+			String city_name = ((String)display.get(0)).replaceAll("[0-9]", "").trim();
 			Attraction a = new Attraction(attr_name, city_name, rating, attr_distance, picURL);
 			list.add(a);
 		}
