@@ -122,17 +122,6 @@ public class YelpAPI {
         this.searchForBusinessesByLocation(this.search_term, this.search_location, location_by_name);
     
     return searchResponseJSON;
-    /*JSONObject firstBusiness = (JSONObject) businesses.get(0);
-    String firstBusinessID = firstBusiness.get("id").toString();
-    System.out.println(String.format(
-        "%s businesses found, querying business info for the top result \"%s\" ...",
-        businesses.size(), firstBusinessID));
-
-    // Select the first business and display business details
-    String businessResponseJSON = yelpApi.searchByBusinessId(firstBusinessID.toString());
-    System.out.println(String.format("Result for business \"%s\" found:", firstBusinessID));
-    System.out.println(businessResponseJSON);*/
-    
   }
 
   public String search(String location, int distance, boolean location_by_name){
